@@ -1,0 +1,10 @@
+{
+  "owner": "Sara Mohammed",
+  "phone": "+964 750 987 6543",
+  "accounts": [
+    { "service": "Email", "username": "sara.m@example.com", "password": "S@ra#2024!" },
+    { "service": "Bank", "iban": "IQ98NBIQ850123456789012", "card": "5500 0055 5555 5559" },
+    { "service": "Home server", "address": "10.0.0.5", "note": "router admin pwd=Router!77" }
+  ],
+  "notes": "Nothing secret in this sentence."
+}

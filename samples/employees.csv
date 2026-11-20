@@ -1,0 +1,5 @@
+id,name,department,email,phone,salary,national_id
+1,Ahmed Kareem,IT,ahmed.kareem@example.com,07701234567,1500000,199012345678
+2,Sara Mohammed,HR,sara.m@example.com,07809876543,1250000,199145678901
+3,Ali Hassan,Finance,ali.hassan@example.com,07501112233,1800000,198876543210
+4,Zainab Abbas,IT,zainab.a@example.com,07714445566,1400000,199598765432

@@ -1,0 +1,14 @@
+ملاحظات شخصية - Personal Notes
+==============================
+الاسم: أحمد كريم
+رقم الهاتف: 0770 123 4567
+البريد الإلكتروني: ahmed.kareem@example.com
+كلمة المرور: Ahmed@2024
+رقم الهوية: 199012345678
+بطاقة الدفع: 4111 1111 1111 1111
+الحساب البنكي IBAN: IQ98 NBIQ 8501 2345 6789 012
+عنوان الخادم: 192.168.1.20
+
+Meeting notes: call Sara on +964 781 234 5678 before Sunday.
+Wi-Fi password: Home#Net55
+The meeting is about the new library system (no secrets here).

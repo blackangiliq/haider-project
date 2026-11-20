@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>SelectiveEncryption</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SelectiveEncryption.Core\SelectiveEncryption.Core.csproj" />
+  </ItemGroup>
+</Project>
