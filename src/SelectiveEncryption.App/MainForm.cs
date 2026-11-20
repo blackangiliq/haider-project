@@ -64,7 +64,7 @@ public class MainForm : Form
         var bar = Toolbar(
             NewButton("Open file…", (_, _) =>
             {
-                using var dialog = new OpenFileDialog { Filter = "Text files|*.txt;*.csv;*.json;*.log;*.md|All files|*.*" };
+                using var dialog = new OpenFileDialog { Filter = "Text files|*.txt;*.csv;*.json;*.log;*.md|All files|*.*", InitialDirectory = SamplesFolder() };
                 if (dialog.ShowDialog() == DialogResult.OK) Try(() => OpenTextFile(dialog.FileName));
             }),
             NewButton("Encrypt checked items", (_, _) => Try(EncryptText)),
@@ -168,7 +168,7 @@ public class MainForm : Form
         var bar = Toolbar(
             NewButton("Open image…", async (_, _) =>
             {
-                using var dialog = new OpenFileDialog { Filter = "Images|*.png;*.jpg;*.jpeg;*.bmp" };
+                using var dialog = new OpenFileDialog { Filter = "Images|*.png;*.jpg;*.jpeg;*.bmp", InitialDirectory = SamplesFolder("images") };
                 if (dialog.ShowDialog() == DialogResult.OK) await TryAsync(() => OpenImageAsync(dialog.FileName));
             }),
             NewButton("Encrypt checked regions", (_, _) => Try(EncryptImage)),
@@ -281,6 +281,12 @@ public class MainForm : Form
         ]);
         grid.Controls.Add(buttons, 1, 2);
 
+        if (SamplesFolder() != "")   // ready to try with the bundled samples
+        {
+            inputFolderBox.Text = SamplesFolder();
+            outputFolderBox.Text = Path.Combine(AppContext.BaseDirectory, "encrypted_output");
+        }
+
         page.Controls.AddRange([folderList, grid]);
         return page;
     }
@@ -311,6 +317,13 @@ public class MainForm : Form
 
     string[] CustomWords() =>
         wordsBox.Text.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+    // The downloaded release has a "samples" folder next to the program: open dialogs start there.
+    static string SamplesFolder(string subFolder = "")
+    {
+        string folder = Path.Combine(AppContext.BaseDirectory, "samples", subFolder);
+        return Directory.Exists(folder) ? folder : "";
+    }
 
     void ShowStatus(string message, bool error = false)
     {

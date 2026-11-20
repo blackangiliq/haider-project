@@ -2,6 +2,27 @@
 
 **Selective Encryption for Protecting Sensitive Information in Personal Digital Files**
 
+## تحميل البرنامج وتجربته
+
+<p align="center">
+  <a href="https://github.com/blackangiliq/haider-project/releases/latest/download/SelectiveEncryption-win-x64.zip">
+    <b>⬇️ تحميل SelectiveEncryption-win-x64.zip — الإصدار 1.0.0 (حوالي 100 ميغابايت)</b>
+  </a>
+</p>
+
+| الخطوة | ماذا تفعل |
+|---|---|
+| 1 | حمّل الملف من الرابط أعلاه (أو من صفحة [Releases](https://github.com/blackangiliq/haider-project/releases/latest)) |
+| 2 | فك الضغط: كليك يمين على الملف ← **Extract All** |
+| 3 | شغّل **`SelectiveEncryption.exe`** — **لا يحتاج تثبيت .NET** (كل ما يحتاجه موجود داخله) |
+| 4 | إذا ظهرت رسالة **Windows protected your PC** فالسبب أن البرنامج غير موقّع رقمياً: اضغط **More info** ثم **Run anyway** |
+| 5 | جرّب ملفات مجلد `samples` المرفق: نافذة الفتح تبدأ فيه تلقائياً، وتبويب المجلد جاهز عليه |
+
+- **محتوى الملف المضغوط:** `SelectiveEncryption.exe` (الواجهة الرسومية) · `selenc.exe` (سطر الأوامر) · `samples/` (ملفات وصور تجريبية) · `README.txt` (تعليمات سريعة)
+- **المتطلبات:** Windows 10 (نسخة 2004 أو أحدث) أو Windows 11، 64 بت. ولقراءة الصور العربية: اللغة العربية مثبتة في ويندوز.
+
+---
+
 | | |
 |---|---|
 | **إعداد الطلاب** | حيدر · أكرم |
@@ -597,6 +618,7 @@ JPEG ضغط **فاقد** (lossy): يغيّر قيم البكسلات قليلا�
 - قائمة العناصر فيها **مربعات اختيار**: المستخدم يقرر ما يُشفَّر وما يبقى ظاهراً.
 - كل نوع له لون ثابت في النص وفي القائمة.
 - الأخطاء (مثل كلمة مرور خاطئة) تظهر **باللون الأحمر في شريط الحالة** بدل إغلاق البرنامج (`Try` / `TryAsync`).
+- إذا وُجد مجلد `samples` بجانب البرنامج (كما في نسخة الإصدار) تبدأ نوافذ الفتح فيه، ويُملأ تبويب المجلد به تلقائياً (`SamplesFolder`).
 - تبويب المجلد يعمل في `Task.Run` حتى لا تتجمد النافذة، ويستخدم `Progress<T>` لإضافة كل نتيجة للقائمة فور انتهائها.
 - إصلاح عرض: `RichTextBox` كان يعرض رقم الهاتف الإنجليزي مقلوباً إذا جاء بعد أسطر عربية؛ فعّلنا خيار `BOE_UNICODEBIDI` ليستخدم خوارزمية Unicode القياسية لاتجاه النص (العرض فقط، البيانات لم تتأثر أبداً).
 
@@ -825,6 +847,11 @@ Phone: 0770 123 4567        →   07/7/0 1129 4567
 
 ## 15. التشغيل والبناء
 
+### أسهل طريقة: النسخة الجاهزة
+حمّل `SelectiveEncryption-win-x64.zip` من [صفحة الإصدارات](https://github.com/blackangiliq/haider-project/releases/latest) وشغّل `SelectiveEncryption.exe` (التفاصيل في [أعلى الصفحة](#تحميل-البرنامج-وتجربته)). لا تحتاج أي شيء من الخطوات أدناه.
+
+الخطوات التالية فقط لمن يريد **بناء المشروع من الكود المصدري**.
+
 ### المتطلبات
 - **Windows 10 (نسخة 2004 / 19041) أو Windows 11**
 - **.NET 10 SDK**: https://dotnet.microsoft.com/download
@@ -852,6 +879,14 @@ dotnet run --project src/SelectiveEncryption.Cli -- ocr samples/images/arabic_no
 dotnet test
 ```
 أو فتح `HaiderProject.sln` في **Visual Studio 2026** (يدعم .NET 10) وتشغيل المشروع `SelectiveEncryption.App`.
+
+### بناء نسخة الإصدار بنفسك
+هكذا صُنع ملف الإصدار: كل برنامج ملف `exe` واحد يحتوي .NET بداخله (`--self-contained`)، مضغوط (`EnableCompressionInSingleFile`)، فلا يحتاج المستخدم تثبيت أي شيء:
+```powershell
+dotnet publish src/SelectiveEncryption.App -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:DebugType=none -o out/release/SelectiveEncryption-win-x64
+dotnet publish src/SelectiveEncryption.Cli -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:DebugType=none -o out/release/SelectiveEncryption-win-x64
+```
+ثم نسخ مجلد `samples` بجانبهما وضغط المجلد.
 
 ---
 
